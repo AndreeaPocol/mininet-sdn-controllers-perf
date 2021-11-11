@@ -28,6 +28,7 @@ do
     sudo rm $captureFilePoxController &> /dev/null
     sudo rm $captureFileOvscController &> /dev/null
 
+############################### POX ###############################
     cd ~/pox
     sudo ./pox.py forwarding.l2_learning host_tracker openflow.discovery openflow.of_01 --port=6633 &
     echo "********** POX CONTROLLER STARTED **********"
@@ -39,12 +40,14 @@ do
     echo "********** STARTING TRAFFIC **********"
     sudo expect -c '
         spawn sudo python topo_launcher.py --controller=remote,ip=127.0.0.1 --topo=linear,5
+        expect "POX/OVSC: "
+        send "POX\n"
         expect "GEN/CLI/QUIT: "
         send "GEN\n"
         expect "Experiment duration: "
-        send "36\n"
+        send "180\n"
         expect "No of elephant flows: "
-        send "1\n"
+        send "5\n"
         expect "No of mice flows: "
         exec sudo tshark -i "any" -f "tcp port 6633" -a duration:180 -w /media/sf_Shared/pox.pcap &
         send "45\n"
@@ -102,9 +105,9 @@ do
         expect "GEN/CLI/QUIT: "
         send "GEN\n"
         expect "Experiment duration: "
-        send "36\n"
+        send "180\n"
         expect "No of elephant flows: "
-        send "1\n"
+        send "5\n"
         expect "No of mice flows: "
         exec sudo tshark -i "any" -f "tcp port 6653" -a duration:180 -w /media/sf_Shared/default.pcap &
         send "45\n"

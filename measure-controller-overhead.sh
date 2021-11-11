@@ -8,20 +8,25 @@ num_experiments=1
 
 pox_csv_file=~/mininet-flow-generator/results_pox_controller.csv
 def_csv_file=~/mininet-flow-generator/results_default_controller.csv
+ovsc_csv_file=~/mininet-flow-generator/results_ovs_controller.csv
 captureFileDefaultController=/media/sf_Shared/default.pcap
 captureFilePoxController=/media/sf_Shared/pox.pcap
+captureFileOvscController=/media/sf_Shared/ovsc.pcap
 
 sudo rm -rf /home/mininet/Desktop/mininet-log/test*
 sudo rm -f $pox_csv_file &> /dev/null
 sudo rm -f $def_csv_file &> /dev/null
+sudo rm -f $ovsc_csv_file &> /dev/null
 
 sudo touch $pox_csv_file
 sudo touch $def_csv_file
+sudo touch $ovsc_csv_file
 
 for (( n=0; n<$num_experiments; n++ ))
 do
     sudo rm $captureFileDefaultController &> /dev/null
     sudo rm $captureFilePoxController &> /dev/null
+    sudo rm $captureFileOvscController &> /dev/null
 
     cd ~/pox
     sudo ./pox.py forwarding.l2_learning host_tracker openflow.discovery openflow.of_01 --port=6633 &

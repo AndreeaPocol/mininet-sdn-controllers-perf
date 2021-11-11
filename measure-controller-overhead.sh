@@ -59,6 +59,38 @@ do
     sudo python stats.py $captureFilePoxController >> $pox_csv_file &
     echo "********** POX CONTROLLER RESULTS SAVED TO FILE **********"
 
+############################## OVS ###############################
+
+    cd ~/mininet-flow-generator
+    # export FLNM=$captureFileOvscController
+    sudo mn --clean &> /dev/null
+    echo "********** CLEANUP COMPLETE **********"
+    echo "********** STARTING TRAFFIC **********"
+    sudo expect -c '
+        spawn sudo python topo_launcher.py --controller=ovsc,ip=127.0.0.1 --topo=linear,5
+        expect "POX/OVSC: "
+        send "OVSC\n"
+        expect "GEN/CLI/QUIT: "
+        send "GEN\n"
+        expect "Experiment duration: "
+        send "180\n"
+        expect "No of elephant flows: "
+        send "5\n"
+        expect "No of mice flows: "
+        exec sudo tshark -i "any" -f "tcp port 6633" -a duration:180 -w /media/sf_Shared/ovsc.pcap &
+        send "45\n"
+        interact
+    '
+
+    sleep 2
+    echo "********** TSHARK FINISHED **********"
+
+    sudo echo "Run $n" >> $ovsc_csv_file
+    sudo python stats.py $captureFileOvscController >> $ovsc_csv_file &
+    echo "********** OVS CONTROLLER RESULTS SAVED TO FILE **********"
+
+############################### DEFAULT ###############################
+
     # export FLNM=$captureFileDefaultController
     sudo mn --clean &> /dev/null
     echo "********** CLEANUP COMPLETE **********"

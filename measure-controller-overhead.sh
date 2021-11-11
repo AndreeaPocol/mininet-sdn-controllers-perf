@@ -21,7 +21,7 @@ do
     echo "********** POX CONTROLLER STARTED **********"
 
     cd ~/mininet-flow-generator
-    filename=/tmp/pox.pcap
+    filename=/media/sf_Shared/pox.pcap
     # export FLNM=$filename
     sudo mn --clean &> /dev/null
     echo "********** CLEANUP COMPLETE **********"
@@ -35,7 +35,7 @@ do
         expect "No of elephant flows: "
         send "1\n"
         expect "No of mice flows: "
-        exec sudo tshark -i "any" -J "OpenFlow_v1" -a duration:36 -w /tmp/pox.pcap &
+        exec sudo tshark -i "any" -J "OpenFlow_v1" -a duration:36 -w /media/sf_Shared/pox.pcap &
         send "9\n"
         interact
         expect "GEN/CLI/QUIT: "
@@ -44,7 +44,7 @@ do
     '
 
     sleep 2
-    ls /tmp/pox.pcap
+    ls $filename
     echo "********** TSHARK FINISHED **********"
 
     sudo pkill -9 -f pox*
@@ -55,7 +55,7 @@ do
     echo "********** POX CONTROLLER RESULTS SAVED TO FILE **********"
     sudo rm $filename &> /dev/null
 
-    filename=/tmp/default.pcap
+    filename=/media/sf_Shared/default.pcap
     # export FLNM=$filename
     sudo mn --clean &> /dev/null
     echo "********** CLEANUP COMPLETE **********"
@@ -69,7 +69,7 @@ do
         expect "No of elephant flows: "
         send "1\n"
         expect "No of mice flows: "
-        exec sudo tshark -i "any" -J "OpenFlow_v1" -a duration:36 -w /tmp/default.pcap &
+        exec sudo tshark -i "any" -J "OpenFlow_v1" -a duration:36 -w /media/sf_Shared/default.pcap &
         send "9\n"
         interact
         expect "GEN/CLI/QUIT: "
@@ -77,7 +77,7 @@ do
         expect eof
     '
     sleep 2
-    ls /tmp/default.pcap
+    ls $filename
     echo "********** TSHARK FINISHED **********"
 
     sudo echo "Run $n" >> $def_csv_file

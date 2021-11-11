@@ -41,12 +41,9 @@ do
         expect "No of elephant flows: "
         send "1\n"
         expect "No of mice flows: "
-        exec sudo tshark -i "any" -f "tcp port 6633" -a duration:36 -w /media/sf_Shared/pox.pcap &
-        send "9\n"
+        exec sudo tshark -i "any" -f "tcp port 6633" -a duration:180 -w /media/sf_Shared/pox.pcap &
+        send "45\n"
         interact
-        expect "GEN/CLI/QUIT: "
-        send "QUIT\n"
-        expect eof
     '
 
     sleep 2
@@ -104,12 +101,9 @@ do
         expect "No of elephant flows: "
         send "1\n"
         expect "No of mice flows: "
-        exec sudo tshark -i "any" -f "tcp port 6633" -a duration:36 -w /media/sf_Shared/default.pcap &
-        send "9\n"
+        exec sudo tshark -i "any" -f "tcp port 6653" -a duration:180 -w /media/sf_Shared/default.pcap &
+        send "45\n"
         interact
-        expect "GEN/CLI/QUIT: "
-        send "QUIT\n"
-        expect eof
     '
     sleep 2
     echo "********** TSHARK FINISHED **********"

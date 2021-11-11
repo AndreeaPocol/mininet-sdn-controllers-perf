@@ -35,7 +35,7 @@ do
         expect "No of elephant flows: "
         send "1\n"
         expect "No of mice flows: "
-        exec sudo tshark -i "any" -J "OpenFlow_v1" -a duration:36 -w /media/sf_Shared/pox.pcap &
+        exec sudo tshark -i "any" -f "tcp port 6633" -a duration:36 -w /media/sf_Shared/pox.pcap &
         send "9\n"
         interact
         expect "GEN/CLI/QUIT: "
@@ -69,7 +69,7 @@ do
         expect "No of elephant flows: "
         send "1\n"
         expect "No of mice flows: "
-        exec sudo tshark -i "any" -J "OpenFlow_v1" -a duration:36 -w /media/sf_Shared/default.pcap &
+        exec sudo tshark -i "any" -f "tcp port 6633" -a duration:36 -w /media/sf_Shared/default.pcap &
         send "9\n"
         interact
         expect "GEN/CLI/QUIT: "

@@ -1,5 +1,5 @@
 # Overview:
-This script compares the network overhead of various popular Software-Defined Networking (SDN) controllers. 
+`measure-controller-overhead.sh` compares the network overhead of various popular Software-Defined Networking (SDN) controllers. 
 It analyzes the number and types of packets produced in the network as managed by the default, OVS and POX controllers.
 
 The workload generator used is the Mininet Flow Generator <sup>[1](#mininet-flow-generator)</sup>.

@@ -11,7 +11,7 @@ With MIT, a single round consists of running each alternative once in sequence.
 
 # How to run:
 ```
-./script.sh
+./measure-controller-overhead.sh
 ```
 
 # What is run:
@@ -29,6 +29,8 @@ for numExperiments do
   end for
 end for
 ```
+
+Note: OpenFlow packets can then be parsed using `openflow_packet_parser.py`, which takes a capture file as the single command-line argument.
 
 # Future work
 This script can be extended by the addition of to include more controllers, topologies, workload generators, 

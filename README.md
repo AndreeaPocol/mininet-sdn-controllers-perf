@@ -3,7 +3,7 @@
 It analyzes the number and types of packets produced in the network as managed by the default, OVS and POX controllers.
 
 The workload generator used is the Mininet Flow Generator <sup>[1](#mininet-flow-generator)</sup>.
-This generates realistic flows whcih exercise the controllers. Packets are measured using `tshark` 
+This generates realistic flows which exercise the controllers. Packets are measured using `tshark` 
 and examined using Python's `scapy` library. 
 
 We apply the Multiple Interleaved Trials (MIT) methodology to obtain fair and repeatable comparisons in a virtualized environment. 
